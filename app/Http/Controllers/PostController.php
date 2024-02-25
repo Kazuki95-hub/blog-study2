@@ -9,6 +9,9 @@ class PostController extends Controller
 {
     public function index(Post $post)
     {
-        return $post->get();
+        return view ('posts.index')->with(['posts' => $post->getPaginateByLimit(1)]);
+        //ビューを返している。その際に、posts.indexというビューを表示して、
+        //その中にpostsという変数を渡す。
+        //この変数には$post->get()で取得した投稿のデータが含まれている。
     }
 }
