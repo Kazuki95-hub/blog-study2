@@ -32,6 +32,9 @@
                 @endforeach
             </div>
             <a href='/posts/create'>create</a>
+            <div class="footer">
+                <a href="/">戻る</a>
+            </div>
         </body>
     </x-app-layout>
         <script>

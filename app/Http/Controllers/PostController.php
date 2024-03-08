@@ -9,27 +9,43 @@ use App\Models\Category;
 
 class PostController extends Controller
 {
-    public function index(Post $post)
+    // public function index(Post $post)
+    // {
+    //     $client = new \GuzzleHttp\Client();
+    //     $url = 'https://teratail.com/api/v1/questions';
+    //     $response = $client->request(
+    //         'GET',
+    //         $url,
+    //         ['Bearer' => config('services.teratail.token')]
+    //     );
+        
+    //     $questions = json_decode($response->getBody(),true);
+        
+        
+        
+    //     return view ('posts.index')->with([
+    //         'posts' => $post->getPaginateByLimit(5),
+    //         'questions' => $questions['questions'],
+    //     ]);
+    //     //ビューを返している。その際に、posts.indexというビューを表示して、
+    //     //その中にpostsという変数を渡す。
+    //     //この変数には$post->get()で取得した投稿のデータが含まれている。
+    // }
+    public function index(Request $request,Post $post)
     {
-        $client = new \GuzzleHttp\Client();
-        $url = 'https://teratail.com/api/v1/questions';
-        $response = $client->request(
-            'GET',
-            $url,
-            ['Bearer' => config('services.teratail.token')]
-        );
-        
-        $questions = json_decode($response->getBody(),true);
+        $keyword = $request->query('keyword');
+       
+        if(empty($keyword)){
+            $posts = $post->getPaginateByLimit(5);
+        }else{
+            $posts = $post->searchPaginateByLimit($keyword,5 );
+        }
         
         
-        
-        return view ('posts.index')->with([
-            'posts' => $post->getPaginateByLimit(5),
-            'questions' => $questions['questions'],
+        return view('posts.index')->with([
+            'posts' => $posts,
+            'keyword' => $keyword,
         ]);
-        //ビューを返している。その際に、posts.indexというビューを表示して、
-        //その中にpostsという変数を渡す。
-        //この変数には$post->get()で取得した投稿のデータが含まれている。
     }
     public function show(Post $post)
     {

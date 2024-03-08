@@ -11,6 +11,12 @@
         INDEX
         </x-slot>
         <body>
+            <div>
+                <form action="{{ route('posts.index') }}" method="GET">
+                    <input type= "text" name="keyword" value="{{ $keyword }}">
+                    <input type= "submit" value= "検索">
+                </form>
+            </div>
             <h1>BlogName</h1>
             <div class = 'posts'>
                 @foreach($posts as $post)
@@ -21,7 +27,7 @@
                 {{ $posts->links() }}
                 </div>
                 <div class= 'post'>
-                    <h2 class = 'title'>{{ $post->title }}</h2>
+                    <!--<h2 class = 'title'>{{ $post->title }}</h2>-->
                     <p class = 'body'>{{ $post->body }}</p>
                     <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
                     <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method= "post">
@@ -35,13 +41,13 @@
             <a href='/posts/create'>create</a>
             <div>ログインユーザー:{{ Auth::user()->name }}</div>
             <!--<div>-->
-            <!--    @foreach($questions as $question)-->
+                {{--<!--@foreach($questions as $question)-->
             <!--        <div>-->
             <!--            <a href="https://teratail.com/questions/{{ $question['id'] }}">-->
             <!--                    {{ $question['title'] }}-->
             <!--            </a>-->
             <!--        </div>-->
-            <!--    @endforeach-->
+            <!--    @endforeach-->--}}
             <!--</div>-->
         </body>
     </x-app-layout>

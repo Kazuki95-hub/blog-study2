@@ -30,4 +30,10 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function searchPaginateByLimit(string $keyword,int $limit_count = 5 )
+    {
+        return $this->where('title', 'LIKE' ,"%{$keyword}")
+                    ->orWhere('body' ,'LIKE',"%{$keyword}")
+                    ->paginate($limit_count);
+    }
 }
