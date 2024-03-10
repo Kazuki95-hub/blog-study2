@@ -6,9 +6,10 @@
          </x-slot>
         <head>
             <meta charset="utf-8">
-            
             <!-- Fonts -->
             <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+            <script src="{{ asset('resources/js/app.js') }}" defer></script>
+            <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet">
         </head>
         <!--<div>INDEX</div>-->
        
@@ -16,7 +17,7 @@
             <div>
                 <form action="{{ route('posts.index') }}" method="GET">
                     <input type= "text" name="keyword" value="{{ $keyword }}">
-                    <input type= "submit" value= "検索">
+                    <input type= "submit" value= "検索" class="btn btn-primary">
                 </form>
             </div>
             
@@ -26,9 +27,6 @@
                 <h2 class='title'>
                 <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                 </h2>
-                <div class='paginate'>
-                {{ $posts->links() }}
-                </div>
                 <div class= 'post'>
                     <!--<h2 class = 'title'>{{ $post->title }}</h2>-->
                     <p class = 'body'>{{ $post->body }}</p>
@@ -40,6 +38,9 @@
                     </form>
                 </div>
                 @endforeach
+            </div>
+            <div class='paginate' style="display: inline-block;">
+                {{ $posts->links() }}
             </div>
             <a href='/posts/create'>create</a>
             <div>ログインユーザー:{{ Auth::user()->name }}</div>
