@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                         {{ __('Index') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('teratail')" :active="request()->routeIs('teratail')">
+                        {{ __('Teratail') }}
+                    </x-nav-link>
                 </div>
             </div>
 

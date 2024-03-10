@@ -2,11 +2,12 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <x-app-layout>
         <x-slot name="header">
+            <h2 class ="font-semibold text-xl text-gray-800 leading-tight">Index</h2>
+        </x-slot>  
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
     </head>
-    </x-slot>
+   
     <body>
         <h1>Blog Name</h1>
         <form action="/posts" method="POST">

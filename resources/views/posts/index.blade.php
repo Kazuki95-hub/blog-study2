@@ -2,14 +2,16 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <x-app-layout>
         <x-slot name="header">
+            <h2 class ="font-semibold text-xl text-gray-800 leading-tight">Index</h2>
+         </x-slot>
         <head>
             <meta charset="utf-8">
-            <title>blog</title>
+            
             <!-- Fonts -->
             <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         </head>
-        INDEX
-        </x-slot>
+        <!--<div>INDEX</div>-->
+       
         <body>
             <div>
                 <form action="{{ route('posts.index') }}" method="GET">
@@ -17,9 +19,10 @@
                     <input type= "submit" value= "検索">
                 </form>
             </div>
-            <h1>BlogName</h1>
+            
             <div class = 'posts'>
                 @foreach($posts as $post)
+                <h1>BlogName</h1>
                 <h2 class='title'>
                 <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                 </h2>
