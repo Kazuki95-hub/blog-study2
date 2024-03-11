@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 
-.pagination {
-    display: inline-block
+.pagenate li {
+    display: inline-block;
 }

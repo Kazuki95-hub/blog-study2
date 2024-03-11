@@ -8,8 +8,7 @@
             <meta charset="utf-8">
             <!-- Fonts -->
             <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-            <script src="{{ asset('resources/js/app.js') }}" defer></script>
-            <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet">
+            
         </head>
         <!--<div>INDEX</div>-->
        
@@ -39,7 +38,7 @@
                 </div>
                 @endforeach
             </div>
-            <div class='paginate' style="display: inline-block;">
+            <div class='paginate'>
                 {{ $posts->links() }}
             </div>
             <a href='/posts/create'>create</a>
