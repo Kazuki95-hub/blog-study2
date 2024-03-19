@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <x-app-layout>
-        <x-slot name="header">
-            <h2 class ="font-semibold text-xl text-gray-800 leading-tight">Index</h2>
-         </x-slot>
         <head>
             <meta charset="utf-8">
             <!-- Fonts -->
             <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
             
         </head>
-        <!--<div>INDEX</div>-->
-       
         <body>
-            <div>
+            <div class="row justify-content-end">
+            <div class="col-md-4">
                 <form action="{{ route('posts.index') }}" method="GET">
                     <input type= "text" name="keyword" value="{{ $keyword }}">
                     <input type= "submit" value= "検索" class="btn btn-primary">
                 </form>
             </div>
-            
-            <div class = 'posts'>
+            </div>
+            <div class = 'posts row'>
                 @foreach($posts as $post)
-                <h1>BlogName</h1>
-                <h2 class='title'>
-                <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                </h2>
-                <div class= 'post'>
-                    <!--<h2 class = 'title'>{{ $post->title }}</h2>-->
-                    <p class = 'body'>{{ $post->body }}</p>
-                    <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
-                    <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method= "post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" onclick="deletePost({{ $post->id }})">delete</button>
-                    </form>
+                <div class="col-md-4">
+                    <div class="card">
+                    <div class="card-header">
+                        {{ $post->category->name }}
+                    </div>
+                    <div class ="card border-light mb-3">
+                        <h2 class='card-title'>
+                        <a href="/posts/{{ $post->id }}" class="card-body">{{ $post->title }}</a>
+                        </h2>
+                        <div class= 'post'>
+                            <p class = 'body'>
+                                {{ mb_strlen($post->body) > 10 ? mb_substr($post->body, 0,10) . '...' : $post->body }}
+                            </p>
+                            <a href="/categories/{{ $post->category->id }}">タグ：{{ $post->category->name }}</a>
+                            <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method= "post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn btn-danger btn-sm" onclick="deletePost({{ $post->id }})">delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 </div>
                 @endforeach
             </div>
             <div class='paginate'>
                 {{ $posts->links() }}
             </div>
-            <a href='/posts/create'>create</a>
+            
+            <a href='/posts/create' class="btn btn-light">create</a>
             <div>ログインユーザー:{{ Auth::user()->name }}</div>
             <!--<div>-->
                 {{--<!--@foreach($questions as $question)-->

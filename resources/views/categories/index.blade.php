@@ -10,11 +10,20 @@
         </head>
         </x-slot>
         <body>
-            <h1>BlogName</h1>
-            <div class = 'posts'>
-                @foreach($posts as $post)
+            <div class="row">
+            @php $previousCategory = null; @endphp
+            @foreach($posts as $post)
+                @if ($post->category->name !== $previousCategory)
+                    <h1>{{ $post->category->name }}</h1>
+                 @php $previousCategory = $post->category->name; @endphp <!-- 前のカテゴリを更新 -->
+            @endif
+            
+            <div class="col-md-4">
+            <div class = 'posts card'>
                 <h2 class='title'>
-                <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
+                <div class="card-header">
+                    {{ $post->category->name }}
+                </div>
                 </h2>
                 <div class='paginate'>
                 {{ $posts->links() }}
@@ -22,14 +31,16 @@
                 <div class= 'post'>
                     <h2 class = 'title'>{{ $post->title }}</h2>
                     <p class = 'body'>{{ $post->body }}</p>
-                    <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
+                    <!--<a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>-->
                     <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method= "post">
                         @csrf
                         @method('DELETE')
                         <button type="button" onclick="deletePost({{ $post->id }})">delete</button>
                     </form>
                 </div>
-                @endforeach
+            </div>
+            </div>
+            @endforeach
             </div>
             <a href='/posts/create'>create</a>
             <div class="footer">
