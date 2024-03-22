@@ -11,17 +11,24 @@
             <div>
                 <form method="POST" action="{{ route('contact.send') }}">
                     @csrf
-                    <label>名前</label>
-                        {{ $inputs['sender'] }}
-                    <input name="sender" value="{{ $inputs['sender'] }}" type="hidden">
-                    <label>メールアドレス</label>
-                        {{ $inputs['email'] }}
-                    <input name="email" value="{{ $inputs['email'] }}" type="hidden">
-                    <label>お問い合わせ内容</label>
-                        {!! nl2br(e($inputs['body'])) !!}
-                    <input name="body" value="{{ $inputs['body'] }}" type="hidden">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">名前</label>
+                            {{ $inputs['sender'] }}
+                        <input class="form-control" name="sender" value="{{ $inputs['sender'] }}" type="hidden">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">メールアドレス</label>
+                            {{ $inputs['email'] }}
+                        <input class="form-control" name="email" value="{{ $inputs['email'] }}" type="hidden">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">お問い合わせ内容</label>
+                            {!! nl2br(e($inputs['body'])) !!}
+                        <input class="form-control" name="body" value="{{ $inputs['body'] }}" type="hidden">
+                    </div>
                     <button type="submit" name="action" value="back">入力内容修正</button>
                     <button type="submit" name="action" value="submit">送信する</button>
+                    </div>
                 </form>
             </div>
         </body>
