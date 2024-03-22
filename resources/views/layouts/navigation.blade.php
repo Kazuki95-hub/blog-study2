@@ -33,7 +33,7 @@
                 </ul>
                 <li class ="dropdown nav-item">
                     <button class= "btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div>{{ Auth::user()->name }}</div>
+                        <div>{{ Auth::check() ? Auth::user()->name : 'Guest' }}</div>
                     </button>
                     <ul class="dropdown-menu" style="position: absolute; right: 0;">
                         <li>

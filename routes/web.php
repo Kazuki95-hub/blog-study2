@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TeratailController; 
+use App\Http\Controllers\TeratailController;
+use App\Http\Controllers\ContactsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+Route::get('/contact', [ContactsController::class,'index'])->name('contact.index');
+Route::post('/contact/confirm', [ContactsController::class,'confirm'])->name('contact.confirm');
+Route::post('/contact/thanks', [ContactsController::class,'send'])->name('contact.send');
 
 require __DIR__.'/auth.php';
