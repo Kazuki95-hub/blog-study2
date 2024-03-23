@@ -8,8 +8,8 @@
             
         </head>
         <body>
-            <div class="row justify-content-end">
-                <div class="col-4 pb-2">
+            <div class="container-fluid">
+                <div class="pb-2 d-flex justify-content-end">
                     <form action="{{ route('posts.index') }}" method="GET" class="d-flex">
                         <input type= "text" name="keyword" value="{{ $keyword }}">
                         <input type= "submit" value= "検索" class="btn btn-primary">
@@ -32,11 +32,13 @@
                                     {{ mb_strlen($post->body) > 10 ? mb_substr($post->body, 0,10) . '...' : $post->body }}
                                 </p>
                                 <a href="/categories/{{ $post->category->id }}">タグ：{{ $post->category->name }}</a>
+                                @if(Auth::check())
                                 <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method= "post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger btn-sm" onclick="deletePost({{ $post->id }})">delete</button>
                                 </form>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -46,10 +48,6 @@
                 <div class='paginate px-4'>
                     {{ $posts->links() }}
                 </div>
-            <a href='/posts/create' class="btn btn-light">create</a>
-            <div>
-                ログインユーザー:{{ Auth::user()->name }}
-            </div>
             <div class="row row-cols-1 row-cols-md-3 g-4 px-4">
                 <div class="col">
                     <a class="btn btn-primary" href="https://twitter.com/intent/tweet?url={{ urlencode(url('/posts/')) }}" rel="nofollow noopener" target="_blank">

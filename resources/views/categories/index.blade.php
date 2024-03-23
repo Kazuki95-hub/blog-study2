@@ -29,14 +29,20 @@
                 {{ $posts->links() }}
                 </div>
                 <div class= 'post'>
-                    <h2 class = 'title'>{{ $post->title }}</h2>
+                    <h2 class = 'title'>
+                        <a href="/posts/{{ $post->id }}" class="card-body">
+                            {{ $post->title }}
+                        </a>
+                    </h2>
                     <p class = 'body'>{{ $post->body }}</p>
                     <!--<a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>-->
+                    @if(Auth::check())
                     <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method= "post">
                         @csrf
                         @method('DELETE')
                         <button type="button" onclick="deletePost({{ $post->id }})">delete</button>
                     </form>
+                    @endif
                 </div>
             </div>
             </div>

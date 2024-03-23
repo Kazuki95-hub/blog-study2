@@ -17,21 +17,29 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav nav-underline me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" aria-current="{{ request()->routeIs('dashboard') ? 'page' : '' }}" href="{{ route('dashboard') }}">
-                        {{ __('Dashboard') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('index') ? 'active' : '' }}" aria-current="{{ request()->routeIs('index') ? 'page' : '' }}" href="{{ route('index') }}">
+                    <a style=display:inline-block class="nav-link {{ request()->routeIs('index') ? 'active' : '' }}" aria-current="{{ request()->routeIs('index') ? 'page' : '' }}" href="{{ route('index') }}">
                         {{ __('Index') }}
                     </a>
                 </li>
+                @if(Auth::check())
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('teratail') ? 'active' : '' }}" aria-current="{{ request()->routeIs('teratail') ? 'page' : '' }}" href="{{ route('teratail') }}">
+                    <a style=display:inline-block class="nav-link {{ request()->routeIs('create') ? 'active' : '' }}" aria-current="{{ request()->routeIs('create') ? 'page' : '' }}" href="{{ route('create') }}">
+                        {{ __('Create') }}
+                    </a>
+                </li>
+                @endif
+                <li class="nav-item">
+                    <a style=display:inline-block class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" aria-current="{{ request()->routeIs('contact') ? 'page' : '' }}" href="{{ route('contact.index') }}">
+                        {{ __('Contact') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a style=display:inline-block class="nav-link {{ request()->routeIs('teratail') ? 'active' : '' }}" aria-current="{{ request()->routeIs('teratail') ? 'page' : '' }}" href="{{ route('teratail') }}">
                         {{ __('Teratail') }}
                     </a>
                 </li>
             </ul>
+            @if(Auth::check())
             <li class ="nav-item dropdown" style="list-style:none">
                 <button class= "btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <div>{{ Auth::check() ? Auth::user()->name : 'Guest' }}</div>
@@ -50,6 +58,7 @@
                     </li>
                 </ul>
             </li>
+            @endif
         </div>
     </div>
 </nav>
