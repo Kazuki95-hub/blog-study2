@@ -39,7 +39,7 @@ class ContactsController extends Controller
         
         $inputs = $request->except('action');
         
-        $userEmail = config('app.MAIL_FROM_ADDRESS');
+        $userEmail = config('mail.from.address');
         
         if($action !== 'submit'){
             return redirect()
