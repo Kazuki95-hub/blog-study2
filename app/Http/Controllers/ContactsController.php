@@ -39,6 +39,7 @@ class ContactsController extends Controller
         
         $inputs = $request->except('action');
         
+        $userEmail = config('app.MAIL_FROM_ADDRESS');
         
         if($action !== 'submit'){
             return redirect()
@@ -46,7 +47,7 @@ class ContactsController extends Controller
             ->withInput($inputs);
         } else {
             Mail::to($inputs['email'])->send(new ContactsSendmail($inputs));
-            Mail::to('km4524771@gmail.com')->send(new ContactsSendmail($inputs));
+            Mail::to($userEmail)->send(new ContactsSendmail($inputs));
             
             $request->session()->regenerateToken();
             
