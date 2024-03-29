@@ -12,12 +12,12 @@
                     @csrf
                     <div class="title">
                         <h2>Title</h2>
-                        <input style="300px" type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
+                        <input style="width:300px;" type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
                         <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
                     </div>
                     <div class="body">
                         <h2>Body</h2>
-                        <textarea style="width:90% height:500px" name="post[body]" placeholder="本文">{{ old('post.body') }}</textarea>
+                        <textarea style="width:90%; height:500px;" name="post[body]" placeholder="本文">{{ old('post.body') }}</textarea>
                         <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                     </div>
                     <div class="category">
