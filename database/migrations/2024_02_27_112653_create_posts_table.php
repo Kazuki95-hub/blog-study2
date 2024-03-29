@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title',50);
-            $table->mediumtext('body')->change();
+            $table->string('body',200);
             $table->timestamps();
             $table->softDeletes();
+        });
+        Schema::table('posts', function (Blueprint $table) {
+            $table->mediumText('body')->change(); 
         });
     }
 
